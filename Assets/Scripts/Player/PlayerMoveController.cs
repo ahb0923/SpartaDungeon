@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using static UnityEngine.UI.Image;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerMoveController : MonoBehaviour
 {
     private Rigidbody rigidBody;
 
