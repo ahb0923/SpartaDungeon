@@ -6,17 +6,8 @@ public class PlayerStatHandler : MonoBehaviour
 {
     private Player player;
 
-    [Header("[ Ω∫≈» ]")]
-    [SerializeField]
-    private Status health;
     public Status Health { get; set; }
-
-    [SerializeField]
-    private Status hunger;
     public Status Hunger { get; set; }
-
-    [SerializeField]
-    private Status stamina;
     public Status Stamina { get; set; }
 
     [SerializeField]
@@ -26,6 +17,9 @@ public class PlayerStatHandler : MonoBehaviour
     void Start()
     {
         player = GetComponent<Player>();
+        Health = UIManager.Instance.Guages.health.GetComponent<Status>();
+        Hunger = UIManager.Instance.Guages.hunger.GetComponent<Status>();
+        Stamina = UIManager.Instance.Guages.stamina.GetComponent<Status>();
     }
 
     // Update is called once per frame
@@ -33,15 +27,17 @@ public class PlayerStatHandler : MonoBehaviour
     {
         //if(Health!=null)
         Health.Increase(Health.ChangeValue * Time.deltaTime);
+        Hunger.Decrease(Hunger.ChangeValue * Time.deltaTime);
+
         if (player.state == PLAYER_STATE.IDLE)
         {
-            Stamina.Increase(stamina.ChangeValue * Time.deltaTime);
+            Stamina.Increase(Stamina.ChangeValue * Time.deltaTime);
         }
-        if(hunger.CurrValue <= 0f)
+        if(Hunger.CurrValue <= 0f)
         {
             Health.Decrease(starveDamagae * Time.deltaTime);
         }
-        if(health.CurrValue <= 0f)
+        if(Health.CurrValue <= 0f)
         {
             Die();
         }
@@ -49,12 +45,12 @@ public class PlayerStatHandler : MonoBehaviour
 
     public void Heal(float value)
     {
-        health.Increase(value);
+        Health.Increase(value);
     }
 
     public void Eat(float value)
     {
-        hunger.Increase(value);
+        Hunger.Increase(value);
     }
 
     public void Die()
@@ -64,11 +60,11 @@ public class PlayerStatHandler : MonoBehaviour
 
     public bool UseStamina(float value)
     {
-        if(stamina.CurrValue - value < 0)
+        if(Stamina.CurrValue - value < 0)
         {
             return false;
         }
-        stamina.Decrease(value);
+        Stamina.Decrease(value);
         return true;
     }
 }
