@@ -30,7 +30,7 @@ public class CameraSwitch : MonoBehaviour
 
 
     private bool isMainCam = true;
-    private bool isLerping = false;
+    public bool isLerping = false;
     private Transform target;
 
     private void Awake()
@@ -46,7 +46,8 @@ public class CameraSwitch : MonoBehaviour
 
     public void OnCameraSwitch(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && !isLerping)
+        Debug.Log("카메라 전환 호출");
+        if (context.phase == InputActionPhase.Performed)
         {
             isMainCam = !isMainCam;
             target = isMainCam ? mainCameraPos : subCameraPos;

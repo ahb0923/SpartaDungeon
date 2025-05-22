@@ -1,35 +1,47 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.UI.Image;
+using UnityEngine.UI;
 
 
 public class PlayerMoveController : MonoBehaviour
 {
+    private Player player;
+    private CameraSwitch cameraSwtich;
     private Rigidbody rigidBody;
 
     [Header("Movement")]
     public float moveSpeed;
+    public float baseSpeed;
+    public float runRate;
     public float jumpPower;
+    public bool isRunning;
 
-    private Vector2 currentMovementInput;
+    public Vector2 currentMovementInput;
 
     [Header("Look")]
     public Transform cameraContainer;
-    public float minXlook;
-    public float maxXlook;
+    public float minXLook;
+    public float maxXLook;
     public float lookSensitivity;
+    public Image aim;
     private float cameraCurrentXRotation;
     private Vector2 mouseDelta;
+
+    [Header("Jump")]
+    [SerializeField] 
+    private LayerMask jumpAbleMask;
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
+        isRunning = false;
     }
 
     void Start()
     {
-
+        player = GetComponent<Player>();
+        cameraSwtich = GetComponentInChildren<CameraSwitch>();
     }
     private void FixedUpdate()
     {
@@ -38,10 +50,19 @@ public class PlayerMoveController : MonoBehaviour
     void Update()
     {
     }
+    private void LateUpdate()
+    {
+        CameraLook();
+    }
 
     private void Move()
     {
         Vector3 dir = (transform.forward * currentMovementInput.y) + (transform.right * currentMovementInput.x);
+        if(player.statHandler.Stamina.CurrValue > 0f)
+        {
+            moveSpeed = isRunning ? baseSpeed * runRate : baseSpeed;
+        }
+            
         dir *= moveSpeed;
         dir.y = rigidBody.velocity.y;
 
@@ -58,8 +79,40 @@ public class PlayerMoveController : MonoBehaviour
             currentMovementInput = Vector2.zero;
         }
     }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+        {
+            isRunning = true;
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            isRunning = false;
+        }
+    }
+
+    private void CameraLook()
+    {
+        if (cameraSwtich.State == CAMERA_STATE.MAIN)
+            Cursor.lockState = CursorLockMode.Locked;
+
+        cameraCurrentXRotation += mouseDelta.y * lookSensitivity;
+        cameraCurrentXRotation = Mathf.Clamp(cameraCurrentXRotation, minXLook, maxXLook);
+
+        float currentYRotation = transform.eulerAngles.y;
+        currentYRotation += mouseDelta.x * lookSensitivity;
+
+        cameraContainer.localRotation = Quaternion.Euler(-cameraCurrentXRotation, 0, 0);
+        transform.rotation = Quaternion.Euler(0, currentYRotation, 0);
+        /*
+        cameraContainer.localEulerAngles = new Vector3(-cameraCurrentXRotation, 0, 0);
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);*/
+
+    }
     public void OnLook(InputAction.CallbackContext context)
     {
+
         mouseDelta = context.ReadValue<Vector2>();
     }
 
@@ -67,12 +120,18 @@ public class PlayerMoveController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
+            player.statHandler.UseStamina(5);
             rigidBody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
         }
 
     }
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
-        return Physics.SphereCast(transform.position - Vector3.up * 0.5f, 0.41f, Vector3.down, out _, 0.2f, 1 << LayerMask.NameToLayer("Ground"));
+        return Physics.CheckSphere(transform.position + Vector3.down * 0.6f, 0.5f, jumpAbleMask);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.down * 0.6f, 0.5f);
     }
 }

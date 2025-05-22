@@ -33,6 +33,14 @@ public class PlayerStatHandler : MonoBehaviour
         {
             Stamina.Increase(Stamina.ChangeValue * Time.deltaTime);
         }
+        if (player.state == PLAYER_STATE.MOVE)
+        {
+            Stamina.Increase(Stamina.ChangeValue * 0.5f * Time.deltaTime);
+        }
+        if (player.state == PLAYER_STATE.RUN)
+        {
+            Stamina.Decrease(Stamina.ChangeValue * Time.deltaTime);
+        }
         if(Hunger.CurrValue <= 0f)
         {
             Health.Decrease(starveDamagae * Time.deltaTime);
