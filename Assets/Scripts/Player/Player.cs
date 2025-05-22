@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,9 +20,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     public PlayerMoveController moveController;
 
+    public ItemData itemData;
+    public Action addItem;
+
     private void Awake()
     {
         state = PLAYER_STATE.IDLE;
+        GameManager.Instance.player = this;
         statHandler = GetComponent<PlayerStatHandler>();
         moveController = GetComponent<PlayerMoveController>();
     }

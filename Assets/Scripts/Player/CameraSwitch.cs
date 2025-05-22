@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
@@ -27,6 +28,9 @@ public class CameraSwitch : MonoBehaviour
     [SerializeField]
     private CAMERA_STATE state; 
     public CAMERA_STATE State { get => state; set { state = value; } }
+    
+    [SerializeField]
+    public float cameraDistance;
 
 
     private bool isMainCam = true;
@@ -36,12 +40,14 @@ public class CameraSwitch : MonoBehaviour
     private void Awake()
     {
         State = CAMERA_STATE.MAIN;
+        cameraDistance = Vector3.Distance(mainCameraPos.position, subCameraPos.position);
     }
     private void Start()
     {
         target = mainCameraPos;
         mainCamera.position = target.position;
         mainCamera.rotation = target.rotation;  
+        
     }
 
     public void OnCameraSwitch(InputAction.CallbackContext context)

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3432913f83c4654449295fc48a7d85ec, type: 3}
+  m_Name: Sphere_Health_1
+  m_EditorClassIdentifier: 
+  code: 0
+  itemName: Health_Item
+  context: Recovery health 20 points.
+  type: 1
+  icon: {fileID: 21300000, guid: 96abe9144609545419e18f668c98e5b3, type: 3}
+  prefab: {fileID: 6344391864195649768, guid: 5c83510823a43ac4eba3a304ce38a72b, type: 3}
+  isStacking: 1
+  maxStackAmount: 12
+  consumables:
+  - type: 0
+    value: 20

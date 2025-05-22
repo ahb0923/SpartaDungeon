@@ -11,6 +11,11 @@ public class UIGuages : MonoBehaviour
     [SerializeField]
     public Transform stamina;
 
+    private void Awake()
+    {
+        UIManager.Instance.Guages = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

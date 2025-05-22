@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerMoveController : MonoBehaviour
 {
     private Player player;
-    private CameraSwitch cameraSwtich;
+    public CameraSwitch cameraSwtich;
     private Rigidbody rigidBody;
 
     [Header("Movement")]
