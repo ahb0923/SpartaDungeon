@@ -46,7 +46,7 @@ public class CameraSwitch : MonoBehaviour
 
     public void OnCameraSwitch(InputAction.CallbackContext context)
     {
-        Debug.Log("카메라 전환 호출");
+        //Debug.Log("카메라 전환 호출");
         if (context.phase == InputActionPhase.Performed)
         {
             isMainCam = !isMainCam;

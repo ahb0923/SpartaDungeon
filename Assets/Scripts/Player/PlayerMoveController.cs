@@ -16,6 +16,7 @@ public class PlayerMoveController : MonoBehaviour
     public float runRate;
     public float jumpPower;
     public bool isRunning;
+    public bool canRun;
 
     public Vector2 currentMovementInput;
 
@@ -36,6 +37,7 @@ public class PlayerMoveController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         isRunning = false;
+        canRun = true;
     }
 
     void Start()
@@ -62,8 +64,12 @@ public class PlayerMoveController : MonoBehaviour
         {
             moveSpeed = isRunning ? baseSpeed * runRate : baseSpeed;
         }
-            
-        dir *= moveSpeed;
+        else
+        {
+            moveSpeed = baseSpeed;
+        }
+
+            dir *= moveSpeed;
         dir.y = rigidBody.velocity.y;
 
         rigidBody.velocity = dir;
@@ -82,7 +88,7 @@ public class PlayerMoveController : MonoBehaviour
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
+        if(context.phase == InputActionPhase.Performed && canRun)
         {
             isRunning = true;
         }
@@ -120,8 +126,15 @@ public class PlayerMoveController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            player.statHandler.UseStamina(5);
-            rigidBody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            if(player.statHandler.Stamina.CurrValue >= 5f)
+            {
+                player.statHandler.UseStamina(5);
+                rigidBody.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            }
+            else
+            {
+                Debug.Log("스태미너 부족함!");
+            }
         }
 
     }
@@ -129,9 +142,20 @@ public class PlayerMoveController : MonoBehaviour
     {
         return Physics.CheckSphere(transform.position + Vector3.down * 0.6f, 0.5f, jumpAbleMask);
     }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + Vector3.down * 0.6f, 0.5f);
     }
+
+    public void RunPermission(bool value)
+    {
+        if (isRunning)
+        {
+            isRunning = false;
+        }
+        canRun = value;
+    }
+
 }

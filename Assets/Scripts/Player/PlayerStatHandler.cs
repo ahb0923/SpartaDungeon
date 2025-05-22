@@ -33,22 +33,34 @@ public class PlayerStatHandler : MonoBehaviour
         {
             Stamina.Increase(Stamina.ChangeValue * Time.deltaTime);
         }
-        if (player.state == PLAYER_STATE.MOVE)
+        else if (player.state == PLAYER_STATE.MOVE)
         {
             Stamina.Increase(Stamina.ChangeValue * 0.5f * Time.deltaTime);
         }
-        if (player.state == PLAYER_STATE.RUN)
+        else if (player.state == PLAYER_STATE.RUN)
         {
             Stamina.Decrease(Stamina.ChangeValue * Time.deltaTime);
         }
+
         if(Hunger.CurrValue <= 0f)
         {
             Health.Decrease(starveDamagae * Time.deltaTime);
         }
+
         if(Health.CurrValue <= 0f)
         {
             Die();
         }
+
+        if (Stamina.CurrValue <= 0f)
+        {
+            player.moveController.RunPermission(false);
+        }
+        if (!player.moveController.canRun && Stamina.CurrValue >= 10f)
+        {
+            player.moveController.RunPermission(true);
+        }
+
     }
 
     public void Heal(float value)
