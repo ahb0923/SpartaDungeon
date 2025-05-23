@@ -73,6 +73,11 @@ public class PlayerStatHandler : MonoBehaviour
         Hunger.Increase(value);
     }
 
+    public void RecoverStamina(float value)
+    {
+        Stamina.Increase(value);
+    }
+
     public void Die()
     {
         player.state = PLAYER_STATE.DIE;

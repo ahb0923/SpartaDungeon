@@ -19,9 +19,16 @@ public class Player : MonoBehaviour
     public PlayerStatHandler statHandler;
     [SerializeField]
     public PlayerMoveController moveController;
+    [SerializeField]
+    public PlayerInventory inventory;
+    [SerializeField]
+    public Transform dropPosition;
+
 
     public ItemData itemData;
     public Action addItem;
+
+
 
     private void Awake()
     {
@@ -29,6 +36,7 @@ public class Player : MonoBehaviour
         GameManager.Instance.player = this;
         statHandler = GetComponent<PlayerStatHandler>();
         moveController = GetComponent<PlayerMoveController>();
+        inventory = GetComponent<PlayerInventory>();
     }
     private void Update()
     {

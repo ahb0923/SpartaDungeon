@@ -11,7 +11,7 @@ public class UIItemSlots : MonoBehaviour
     public int SelectedSlotIndex { get => selectedSlotIndex; set => selectedSlotIndex = value; }
 
     [SerializeField] 
-    private GameObject[] slots;
+    public GameObject[] slots;
 
     private void Awake()
     {
