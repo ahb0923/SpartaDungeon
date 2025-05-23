@@ -19,7 +19,13 @@ public class JumpItem : MonoBehaviour
                 moveController.ApplyJumpBoost(jumpBoostRate, duration);
             }
             UIManager.Instance.BuffWindow.ActivateBuff(data.icon, data.durationTime);
-            Destroy(gameObject);
+            StartCoroutine(DestroyAfterFrame());
         }
+    }
+
+    private IEnumerator DestroyAfterFrame()
+    {
+        yield return null;
+        Destroy(gameObject);
     }
 }

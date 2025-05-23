@@ -29,6 +29,11 @@ public class UIManager : Singleton<UIManager>
             Debug.Log("ItemSlots is Null");
             ItemSlots = FindAnyObjectByType<UIItemSlots>();
         }
+        if (BuffWindow == null)
+        {
+            Debug.Log("BuffWindow is Null");
+            BuffWindow = FindAnyObjectByType<UIBuffWindow>();
+        }
     }
 
     // Update is called once per frame

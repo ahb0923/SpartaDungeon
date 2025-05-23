@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,15 +46,24 @@ public class UIBuffWindow : MonoBehaviour
     {
         float elapsed = 0f;
         Image fillImage = slot.cooldownImage;
+        TMP_Text timeText = slot.timeText;
+
+        elapsed += Time.deltaTime;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            fillImage.fillAmount = 1 - (elapsed / duration);
+            fillImage.fillAmount = 0 + (elapsed / duration);
+
+            if (timeText != null)
+            {
+                timeText.text = Mathf.CeilToInt(duration - elapsed).ToString();
+            }
+
             yield return null;
         }
 
-        fillImage.fillAmount = 0;
+        fillImage.fillAmount = 1;
         slot.gameObject.SetActive(false);
     }
 }

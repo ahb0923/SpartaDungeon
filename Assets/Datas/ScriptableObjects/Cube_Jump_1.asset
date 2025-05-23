@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3432913f83c4654449295fc48a7d85ec, type: 3}
   m_Name: Cube_Jump_1
   m_EditorClassIdentifier: 
-  code: 0
+  code: 3
   itemName: 
   context: 
-  type: 0
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  type: 1
+  icon: {fileID: 21300000, guid: 66da243c423dc5a43b6a0c8bc5ecd121, type: 3}
+  prefab: {fileID: 6761947556095350461, guid: 56e2c5cbc7fda2f4c9bffd08ae5638aa, type: 3}
   isStacking: 0
   maxStackAmount: 0
   consumables: []
-  isBuff: 0
+  durationTime: 20
