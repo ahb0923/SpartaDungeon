@@ -1,10 +1,11 @@
 # SpartaDungeon
-스파르타 던전 탐험 만들기
-
-
+스파르타 던전 탐험 만들기  
+※초록색 발판은 추후 이동발판으로 만들 예정이며, 현재 레이어설정이 되어있지 않아 해당 발판 위에서는 점프가 불가합니다.  
+  
+  
 이 프로젝트는 Unity Asset Store의 리소스를 사용합니다.  
-라이선스 문제로 GitHub 저장소에는 포함되어 있지 않습니다.
-
+라이선스 문제로 GitHub 저장소에는 포함되어 있지 않습니다.  
+  
 > Assets/Externals/AngeloMaN87/  
 => https://assetstore.unity.com/packages/3d/environments/prototype-map-315588
 
@@ -29,3 +30,5 @@ Left Shift : 달리기
 노란색 : hunger  
 초록색 : stamina  
 파란색 : jumpPower  
+
+ 
