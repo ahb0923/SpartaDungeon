@@ -9,6 +9,8 @@ public class UIManager : Singleton<UIManager>
 
     public UIItemSlots ItemSlots { get; set; }
 
+    public UIBuffWindow BuffWindow { get; set; }
+
 
     void Start()
     {

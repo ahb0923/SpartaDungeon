@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -32,6 +32,8 @@ public class PlayerMoveController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] 
     private LayerMask jumpAbleMask;
+
+    private Coroutine jumpBuffCoroutine;
 
     private void Awake()
     {
@@ -150,7 +152,7 @@ public class PlayerMoveController : MonoBehaviour
         {
             Debug.Log("Jumpboard °¨ÁöµÊ!");
             rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z);
-            rigidBody.AddForce(Vector2.up * jumpPower * 3, ForceMode.Impulse);
+            rigidBody.AddForce(Vector2.up * 15, ForceMode.Impulse);
         }
     }
 
@@ -169,6 +171,22 @@ public class PlayerMoveController : MonoBehaviour
             isRunning = false;
         }
         canRun = value;
+    }
+
+
+    public void ApplyJumpBoost(float multiplier, float duration)
+    {
+        if (jumpBuffCoroutine != null)
+            StopCoroutine(jumpBuffCoroutine);
+
+        jumpBuffCoroutine = StartCoroutine(JumpBoostRoutine(multiplier, duration));
+    }
+
+    private IEnumerator JumpBoostRoutine(float multiplier, float duration)
+    {
+        jumpPower *= multiplier;
+        yield return new WaitForSeconds(duration);
+        jumpPower /= multiplier;
     }
 
 }

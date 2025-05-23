@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public enum ITEM_TYPE
 {
     EQUIPABLE,
-    CONSUMABLE
+    CONSUMABLE,
 }
 
 public enum CONSUMABLE_TYPE
@@ -41,4 +41,5 @@ public class ItemData : ScriptableObject
     [Header("[ 소모품 정보 ]")]
     public ItemDataConsumable[] consumables;
 
+    public float durationTime;
 }
