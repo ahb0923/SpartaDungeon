@@ -47,6 +47,7 @@ public class PlayerMoveController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        IsOnJumpBoard();
         Move();
     }
     void Update()
@@ -142,6 +143,18 @@ public class PlayerMoveController : MonoBehaviour
     {
         return Physics.CheckSphere(transform.position + Vector3.down * 0.6f, 0.5f, jumpAbleMask);
     }
+
+    public void IsOnJumpBoard()
+    {
+        if( Physics.CheckSphere(transform.position + Vector3.down * 0.6f, 0.5f, 1 << LayerMask.NameToLayer("Jumpboard")))
+        {
+            Debug.Log("Jumpboard °¨ÁöµÊ!");
+            rigidBody.velocity = new Vector3(rigidBody.velocity.x, 0, rigidBody.velocity.z);
+            rigidBody.AddForce(Vector2.up * jumpPower * 3, ForceMode.Impulse);
+        }
+    }
+
+
 
     private void OnDrawGizmosSelected()
     {
