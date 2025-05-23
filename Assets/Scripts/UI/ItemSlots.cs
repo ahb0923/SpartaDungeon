@@ -37,7 +37,7 @@ public class ItemSlots : MonoBehaviour
 
         eaText.text = string.Empty;
         icon.gameObject.SetActive(false);
-        highlightColor = background_h.GetComponent<Image>().color;
+       
     }
 
 
@@ -73,6 +73,12 @@ public class ItemSlots : MonoBehaviour
         {
             OffHighlights();
         }
+
+        if (quantity > 1)
+        {
+            OnEa();
+        }
+        else OffEa();
     }
     public void OnHighlights()
     {

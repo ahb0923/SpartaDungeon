@@ -102,7 +102,7 @@ public class PlayerInventory : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
+            if (slots[i].item != null && slots[i].item.code == data.code && slots[i].quantity < data.maxStackAmount)
             {
                 return slots[i];
             }
