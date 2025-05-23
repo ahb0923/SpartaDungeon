@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -129,9 +130,10 @@ public class PlayerInventory : MonoBehaviour
     //presse "mouse[Right Click]"
     public void OnUseButton()
     {
-        if(selectedItem == null)
+        if(selectedItem.item == null)
         { 
-            Debug.Log("빈 아이템 공간입니다."); 
+            Debug.Log("빈 아이템 공간입니다.");
+            return;
         }
         if (selectedItem.item.type == ITEM_TYPE.CONSUMABLE)
         {
@@ -155,6 +157,11 @@ public class PlayerInventory : MonoBehaviour
     }
     public void OnDropButton()
     {
+        if (selectedItem.item == null)
+        {
+            Debug.Log("빈 아이템 공간입니다.");
+            return;
+        }
         ThrowItem(selectedItem.item);
         RemoveSelctedItem();
     }

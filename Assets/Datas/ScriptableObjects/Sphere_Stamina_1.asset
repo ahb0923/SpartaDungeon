@@ -17,7 +17,7 @@ MonoBehaviour:
   context: Recovery stamina 20 points.
   type: 1
   icon: {fileID: 21300000, guid: 8bed94d544d1a7243a0281fe7aef409f, type: 3}
-  prefab: {fileID: 6344391864195649768, guid: 5c83510823a43ac4eba3a304ce38a72b, type: 3}
+  prefab: {fileID: 6951111931976199394, guid: e48fd7f5e2a12d84ca50fb425de7bd3c, type: 3}
   isStacking: 1
   maxStackAmount: 12
   consumables:

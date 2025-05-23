@@ -92,6 +92,7 @@ public class ItemSlots : MonoBehaviour
     }
     public void OnEa()
     {
+        eaText.text = quantity.ToString();
         ea.gameObject.SetActive(true);
     }
     public void OffEa()

@@ -17,7 +17,7 @@ MonoBehaviour:
   context: Recovery hunger 20 points.
   type: 1
   icon: {fileID: 21300000, guid: e8c299a4dc914b248a67abcab6db9286, type: 3}
-  prefab: {fileID: 6344391864195649768, guid: 5c83510823a43ac4eba3a304ce38a72b, type: 3}
+  prefab: {fileID: 2312907768028526775, guid: 5b865fa7143bcf34c9917167888ca08d, type: 3}
   isStacking: 1
   maxStackAmount: 12
   consumables:
