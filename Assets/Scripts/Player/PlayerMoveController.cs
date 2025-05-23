@@ -14,6 +14,7 @@ public class PlayerMoveController : MonoBehaviour
     public float moveSpeed;
     public float baseSpeed;
     public float runRate;
+    public float baseJumpPower;
     public float jumpPower;
     public bool isRunning;
     public bool canRun;
@@ -38,6 +39,7 @@ public class PlayerMoveController : MonoBehaviour
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
+        jumpPower = baseJumpPower;
         isRunning = false;
         canRun = true;
     }
@@ -177,16 +179,20 @@ public class PlayerMoveController : MonoBehaviour
     public void ApplyJumpBoost(float multiplier, float duration)
     {
         if (jumpBuffCoroutine != null)
+        {
             StopCoroutine(jumpBuffCoroutine);
+            jumpPower = baseJumpPower;
+        }
+           
 
         jumpBuffCoroutine = StartCoroutine(JumpBoostRoutine(multiplier, duration));
     }
 
     private IEnumerator JumpBoostRoutine(float multiplier, float duration)
     {
-        jumpPower *= multiplier;
+        jumpPower = baseJumpPower * multiplier;
         yield return new WaitForSeconds(duration);
-        jumpPower /= multiplier;
+        jumpPower = baseJumpPower;
     }
 
 }

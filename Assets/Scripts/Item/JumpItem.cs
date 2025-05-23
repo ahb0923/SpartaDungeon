@@ -18,6 +18,9 @@ public class JumpItem : MonoBehaviour
             {
                 moveController.ApplyJumpBoost(jumpBoostRate, duration);
             }
+            Sprite icon = data.icon;
+            float buffDuration = data.durationTime;
+
             UIManager.Instance.BuffWindow.ActivateBuff(data.icon, data.durationTime);
             StartCoroutine(DestroyAfterFrame());
         }
