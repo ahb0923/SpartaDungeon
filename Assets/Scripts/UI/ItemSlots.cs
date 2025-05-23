@@ -28,8 +28,6 @@ public class ItemSlots : MonoBehaviour
     [SerializeField]
     public Transform pivot;
 
-
-
     private void Awake()
     {
         eaText = ea.gameObject.GetComponent<TextMeshProUGUI>();
@@ -39,7 +37,6 @@ public class ItemSlots : MonoBehaviour
         icon.gameObject.SetActive(false);
        
     }
-
 
     // Start is called before the first frame update
     void Start()
